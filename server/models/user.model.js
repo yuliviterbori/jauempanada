@@ -25,7 +25,7 @@ const UserSchema = new mongoose.Schema({
     }
   }, {timestamps: true});
 
- /* UserSchema.virtual('confirmPassword')
+  UserSchema.virtual('confirmPassword')
   .get( () => this._confirmPassword )
   .set( value => this._confirmPassword = value );
 
@@ -34,7 +34,7 @@ const UserSchema = new mongoose.Schema({
       this.invalidate('confirmPassword', 'Password must match confirm password');
     }
     next();
-  });*/
+  });
 
   UserSchema.pre('save',async function(next) {
     try{

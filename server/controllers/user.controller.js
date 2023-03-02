@@ -8,7 +8,7 @@ module.exports.register = async (req,res) => {
         const user = await User.create(req.body);
         const userToken = jwt.sign({_id:user._id}, SECRET_KEY);
         res.status(201)
-        .cookie('user token', userToken, {httpOnly: true, expires: new Date(Date.now()+90000)})
+        .cookie('usertoken', userToken, {httpOnly: true, expires: new Date(Date.now()+90000)})
         .json({successMessage: "Register user", user: user})
     }
     catch(err){
@@ -16,34 +16,32 @@ module.exports.register = async (req,res) => {
     }
 }
 
-module.exports.login = (req, res) => {
-    User.findOne({ email: req.body.email })
-      .then(user => {
-        if (user === null) {
-          res.json({ msg: "invalid login attempt" });
-        } else {
-          bcrypt
-            .compare(req.body.password, user.password)
-            .then(passwordIsValid => {
-              if (passwordIsValid) {
-                const newJWT = jwt.sign({
-                      _id: user._id
-                })
-                const secret = "mysecret";
-                res
-                  .cookie("usertoken", newJWT, secret, {
-                    httpOnly: true
-                  })
-                  .json({ msg: "success!" });
-              } else {
-                res.json({ msg: "invalid login attempt" });
-              }
-            })
-            .catch(err => res.json({ msg: "invalid login attempt" }));
-        }
+module.exports.login = async (req, res) => {
+  const usuario = await User.findOne({email: req?.body?.email});
+  if(!usuario){
+    res.status(400).json({
+      error: "Email or password incorrect" 
+    })
+  }
+  try{
+    const passwordValida = await bcrypt.compare(req?.body?.password, usuario.password);
+    if(!passwordValida){
+      res.status(400).json({
+        error: "Email or password incorrect" 
       })
-      .catch(err => res.json(err));
-  };
+    }else{
+      const userToken = jwt.sign({_id:usuario._id}, SECRET_KEY);
+      res.status(201)
+        .cookie('usertoken', userToken, {httpOnly: true, expires: new Date(Date.now()+90000)})
+        .json({successMessage: "Login user", user: usuario})
+    }
+
+  }
+  catch(err){
+    res.status(400).json({
+      error: "Email or password incorrect" 
+    })
+  }};
 
 /*module.exports.getAllProducts = (request, response) => {
     Product.find({})

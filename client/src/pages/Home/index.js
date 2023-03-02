@@ -5,7 +5,7 @@ const Home = () => {
     const [products, setProducts] = useState([]);
 
     useEffect(()=>{
-        axios.get("http://localhost:8000/api/product")
+        axios.get("http://localhost:8000/api/product", {withCredentials: true})
             .then(res => {
                 const newProducts = res.data;
                 console.log("newProducts", newProducts)

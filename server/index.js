@@ -1,18 +1,18 @@
 const express = require('express');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
+require('dotenv').config();
 
 const app = express();
 require('./config/mongoose.config');
-require('dotenv').config();
 
-const SERCRET_KEY = process.env.SERCRET_KEY;
-console.log("secret", SERCRET_KEY)
-
-app.use(cookieParser());
-app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
+//Middleware
 app.use(express.json());
 app.use(express.urlencoded({extended: true}))
+//Middleware add cookies
+app.use(cookieParser());
+app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
+
 require('./routes/product.routes')(app);
 require('./routes/user.routes')(app);
 
