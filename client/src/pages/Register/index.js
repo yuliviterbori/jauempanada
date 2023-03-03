@@ -17,7 +17,7 @@ function RegisterForm() {
 
     const onSubmit = () => {
         setErrors({});
-        axios.post("http://localhost:8000/api/register",
+        axios.post("http://localhost:8000/api/user/register",
         {firstName, lastName, email, password, confirmPassword},
         {withCredentials: true}
         )

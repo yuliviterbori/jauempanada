@@ -8,7 +8,7 @@ module.exports.register = async (req,res) => {
         const user = await User.create(req.body);
         const userToken = jwt.sign({_id:user._id}, SECRET_KEY);
         res.status(201)
-        .cookie('usertoken', userToken, {httpOnly: true, expires: new Date(Date.now()+90000)})
+        .cookie('usertoken', userToken, {httpOnly: true, expires: new Date(Date.now()+900000)})
         .json({successMessage: "Register user", user: user})
     }
     catch(err){
@@ -32,7 +32,7 @@ module.exports.login = async (req, res) => {
     }else{
       const userToken = jwt.sign({_id:usuario._id}, SECRET_KEY);
       res.status(201)
-        .cookie('usertoken', userToken, {httpOnly: true, expires: new Date(Date.now()+90000)})
+        .cookie('usertoken', userToken, {httpOnly: true, expires: new Date(Date.now()+900000)})
         .json({successMessage: "Login user", user: usuario})
     }
 
@@ -43,26 +43,31 @@ module.exports.login = async (req, res) => {
     })
   }};
 
-/*module.exports.getAllProducts = (request, response) => {
-    Product.find({})
-        .then(persons => response.json(persons))
-        .catch(err => response.json(err))
+module.exports.checkLogin = async (req, res) =>{
+  res.status(201).json({successMessage: "User connected"})
 }
 
-module.exports.getProduct = (request, response) => {
-    Product.findOne({_id:request.params.id})
-        .then(person => response.json(person))
-        .catch(err => response.json(err))
+module.exports.logout = async (req, res) =>{
+  res.clearCookie('usertoken').json({successMessage: "Logout user"})
 }
 
-module.exports.updateProduct = (request, response) => {
-    Product.findOneAndUpdate({_id: request.params.id}, request.body, {new:true})
-        .then(updatedProduct => response.json(updatedProduct))
-        .catch(err => response.json(err))
-}
+module.exports.getUser = async (req, res) => {
+  const { usertoken } = req.cookie;
+  console.log("req en getuser", req);
 
-module.exports.deleteProduct = (request, response) => {
-    Product.deleteOne({ _id: request.params.id })
-        .then(deleteConfirmation => response.json(deleteConfirmation))
-        .catch(err => response.json(err))
-}*/
+  const decoded = jwt.verify(usertoken, SECRET_KEY);
+
+  try{
+    const usuario = await User.find({_id: decoded._id});
+    res.status(201)
+    .json({
+      successMessage: "Usuario encontrado",
+      user: usuario
+    })
+  }
+  catch(err){
+    res.status(400).json({
+      error: err
+    })
+  }
+}

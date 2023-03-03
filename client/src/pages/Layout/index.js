@@ -1,6 +1,21 @@
+import axios from "axios";
 import { Outlet, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Layout = () => {
+    const navigate = useNavigate()
+    const logout = () => {
+        axios.get("http://localhost:8000/api/user/logout", {withCredentials: true})
+            .then(res => {
+                console.log("saliendo", res?.data);
+                navigate("/login");
+        }).catch( err => {
+            console.log("el usuario ya no estaba logueado", err);
+            navigate("/login");
+        }
+        )
+    }
+
   return (
     <>
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -25,8 +40,8 @@ const Layout = () => {
                                 Mi cuenta
                             </Link>
                             <ul className="dropdown-menu">
-                                <li><Link className="dropdown-item" href="#">Editar</Link></li>
-                                <li><Link className="dropdown-item" href="#">Salir</Link></li>
+                                <li><Link className="dropdown-item" href="/user">Editar</Link></li>
+                                <li><button className="dropdown-item" onClick={logout}>Salir</button></li>
                                 </ul>
                             </li>
                         </ul>

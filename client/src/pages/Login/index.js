@@ -9,7 +9,7 @@ function LoginForm() {
     const navigate = useNavigate();
 
     const onSubmit = () => {
-        axios.post("http://localhost:8000/api/login",
+        axios.post("http://localhost:8000/api/user/login",
         {email, password},
         {withCredentials: true}
         )
