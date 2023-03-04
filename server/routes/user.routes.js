@@ -7,4 +7,5 @@ module.exports = app => {
   app.get("/api/user/status", authenticate, Users.checkLogin);
   app.get("/api/user/logout", authenticate, Users.logout);
   app.get("/api/user", authenticate, Users.getUser);
+  app.put("/api/user", authenticate, Users.updateUser);
 }

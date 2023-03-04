@@ -15,10 +15,10 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="login" element={<LoginForm />} />
+          <Route path="register" element={<RegisterForm />} />
           <Route path="/" element={<ProtectedRoute><Layout /></ProtectedRoute>}>
             <Route index element={<Home />} />
             <Route path="cart" element={<Cart />} />
-            <Route path="register" element={<RegisterForm />} />
             <Route path="user" element={<User />} />
             <Route path="*" element={<NoPage />} />
           </Route>

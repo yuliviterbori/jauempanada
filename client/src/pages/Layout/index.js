@@ -40,7 +40,7 @@ const Layout = () => {
                                 Mi cuenta
                             </Link>
                             <ul className="dropdown-menu">
-                                <li><Link className="dropdown-item" href="/user">Editar</Link></li>
+                                <li><Link className="dropdown-item" to="/user">Mi perfil</Link></li>
                                 <li><button className="dropdown-item" onClick={logout}>Salir</button></li>
                                 </ul>
                             </li>

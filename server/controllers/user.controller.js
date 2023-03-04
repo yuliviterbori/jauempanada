@@ -52,8 +52,8 @@ module.exports.logout = async (req, res) =>{
 }
 
 module.exports.getUser = async (req, res) => {
-  const { usertoken } = req.cookie;
-  console.log("req en getuser", req);
+  const { usertoken } = req.cookies;
+  console.log("usertoken", usertoken);
 
   const decoded = jwt.verify(usertoken, SECRET_KEY);
 
@@ -62,6 +62,26 @@ module.exports.getUser = async (req, res) => {
     res.status(201)
     .json({
       successMessage: "Usuario encontrado",
+      user: usuario
+    })
+  }
+  catch(err){
+    res.status(400).json({
+      error: err
+    })
+  }
+}
+
+module.exports.updateUser = async (req, res) => {
+  const { usertoken } = req.cookies;
+
+  const decoded = jwt.verify(usertoken, SECRET_KEY);
+
+  try{
+    const usuario = await User.findOneAndUpdate({_id: decoded._id}, req.body);
+    res.status(201)
+    .json({
+      successMessage: "Usuario actualizado",
       user: usuario
     })
   }
