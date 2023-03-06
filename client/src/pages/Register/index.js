@@ -39,31 +39,39 @@ function RegisterForm() {
             }
         })
     }
-    return (<>
-    <UserData 
-            firstName={firstName}
-            setFirstName={setFirstName}
-            lastName={lastName}
-            setLastName={setLastName}
-            email={email}
-            setEmail={setEmail}
-            password={password}
-            setPassword={setPassword}
-            onSubmit={onSubmit}
-            confirmPassword={confirmPassword}
-            setConfirmPassword={setConfirmPassword}
-            errors={errors}
-        />
-        {
-            success && (
-                <div className="alert alert-success mt-5" role="alert">
-                    <h4 class="alert-heading">Bienvenido/a {userData?.firstName}!</h4>
-                    <p>Ingresa</p>
-                </div>
-            )
-        }
-    </>
-        
+    return (
+        <div className="container text-center">
+        <div className="row align-items-center">
+          <div className="col">
+            <h2>Registrar usuario</h2>
+            <UserData 
+                firstName={firstName}
+                setFirstName={setFirstName}
+                lastName={lastName}
+                setLastName={setLastName}
+                email={email}
+                setEmail={setEmail}
+                password={password}
+                setPassword={setPassword}
+                onSubmit={onSubmit}
+                confirmPassword={confirmPassword}
+                setConfirmPassword={setConfirmPassword}
+                errors={errors}
+            />
+            {
+                success && (
+                    <div className="alert alert-success mt-5" role="alert">
+                        <h4 className="alert-heading">Bienvenido/a {userData?.firstName}!</h4>
+                        <p>Ingresa</p>
+                    </div>
+                )
+            }
+          </div>
+          <div className="col">
+            <img src="https://empanadasdonoso.com.py/assets/img/gallery/big/e1-compressed_opt.jpg" style={{maxWidth: "100%"}} />
+          </div>
+        </div>
+      </div>        
      );
 }
 

@@ -29,38 +29,47 @@ function LoginForm() {
             }
         })
     }
-    return (<>
+    return (
+    <div class="container text-center">
+    <div class="row align-items-center">
+      <div class="col">
+        <h2>Ingresar</h2>
         <form className="col-6 mx-auto" onSubmit={(e)=>{
-            e.preventDefault();
-            onSubmit();
-        }}>
-        <div className="form-group pt-3">
-            <label htmlFor="email">Email</label>
-            <input 
-                id="email" 
-                type="email" 
-                className="form-control form-control-lg" 
-                placeholder="Ingresa tu email" 
-                value={email} 
-                onChange={e=>setEmail(e.target.value)}/>
-        </div>
-        <div className="form-group pt-3">
-            <label htmlFor="password">Password</label>
-            <input 
-                id="password" 
-                type="password" 
-                className="form-control form-control-lg" 
-                placeholder="Ingresa tu contrasena" 
-                value={password} 
-                onChange={e=>setPassword(e.target.value)}/>
-        </div>
-        
-        <button type="submit" className="btn btn-primary btn-lg w-100 mt-4">Ingresar</button>
+                e.preventDefault();
+                onSubmit();
+            }}>
+            <div className="form-group pt-3">
+                <label htmlFor="email">Email</label>
+                <input 
+                    id="email" 
+                    type="email" 
+                    className="form-control form-control-lg" 
+                    placeholder="Ingresa tu email" 
+                    value={email} 
+                    onChange={e=>setEmail(e.target.value)}/>
+            </div>
+            <div className="form-group pt-3">
+                <label htmlFor="password">Password</label>
+                <input 
+                    id="password" 
+                    type="password" 
+                    className="form-control form-control-lg" 
+                    placeholder="Ingresa tu contrasena" 
+                    value={password} 
+                    onChange={e=>setPassword(e.target.value)}/>
+            </div>
+            
+            <button type="submit" className="btn btn-primary btn-lg w-100 mt-4">Ingresar</button>
 
-        <div className="dropdown-divider"></div>
-        <Link className="dropdown-item" to="/register">No tienes una cuenta? Crear cuenta</Link>
-    </form>
-    </>
+            <div className="dropdown-divider"></div>
+            <Link className="dropdown-item" to="/register">No tienes una cuenta? Crear cuenta</Link>
+        </form>
+      </div>
+      <div class="col">
+        <img src="https://empanadasdonoso.com.py/assets/img/gallery/big/e1-compressed_opt.jpg" style={{maxWidth: "100%"}} />
+      </div>
+    </div>
+  </div>  
         
      );
 }

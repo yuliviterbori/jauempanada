@@ -31,9 +31,18 @@ module.exports.login = async (req, res) => {
       })
     }else{
       const userToken = jwt.sign({_id:usuario._id}, SECRET_KEY);
-      res.status(201)
-        .cookie('usertoken', userToken, {httpOnly: true, expires: new Date(Date.now()+900000)})
-        .json({successMessage: "Login user", user: usuario})
+      if(usuario.orderId){
+        const orderToken = jwt.sign({_id: usuario.orderId}, SECRET_KEY);
+        res.status(201)
+          .cookie('usertoken', userToken, {httpOnly: true, expires: new Date(Date.now()+900000)})
+          .cookie('ordertoken', orderToken, {httpOnly: true, expires: new Date(Date.now()+900000)})
+          .json({successMessage: "Login user", user: usuario})
+      }else{
+        res.status(201)
+          .cookie('usertoken', userToken, {httpOnly: true, expires: new Date(Date.now()+900000)})
+          .json({successMessage: "Login user", user: usuario})
+      }
+      
     }
 
   }
@@ -48,7 +57,7 @@ module.exports.checkLogin = async (req, res) =>{
 }
 
 module.exports.logout = async (req, res) =>{
-  res.clearCookie('usertoken').json({successMessage: "Logout user"})
+  res.clearCookie('usertoken').clearCookie('ordertoken').json({successMessage: "Logout user"})
 }
 
 module.exports.getUser = async (req, res) => {
