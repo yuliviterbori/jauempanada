@@ -24,3 +24,13 @@ code {
   background-color: #e76444;
   border-color: #e76444;
 }
+
+.text-primary{
+  color: #e76444 !important;
+}
+.text-brown{
+  color: #b44a37
+}
+.bg-contrast-black{
+  background-color: rgba(200, 200, 200, 0.5);
+}

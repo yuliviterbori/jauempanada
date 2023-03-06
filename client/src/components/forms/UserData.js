@@ -29,7 +29,7 @@ function UserData({
                 value={firstName} 
                 onChange={e=>setFirstName(e.target.value)}/>
             { errors && errors?.firstName && (
-                <small class="form-text text-danger">
+                <small className="form-text text-danger">
                     {errors?.firstName?.message}
                 </small>
             )}
@@ -44,7 +44,7 @@ function UserData({
                 value={lastName} 
                 onChange={e=>setLastName(e.target.value)}/>
             { errors && errors?.lastName && (
-                <small class="form-text text-danger">
+                <small className="form-text text-danger">
                     {errors?.lastName?.message}
                 </small>
             )}
@@ -59,7 +59,7 @@ function UserData({
                 value={email} 
                 onChange={e=>setEmail(e.target.value)}/>
             { errors && errors?.email && (
-                <small class="form-text text-danger">
+                <small className="form-text text-danger">
                     {errors?.email?.message}
                 </small>
             )}
@@ -74,7 +74,7 @@ function UserData({
                 value={password} 
                 onChange={e=>setPassword(e.target.value)}/>
             { errors && errors?.password && (
-                <small class="form-text text-danger">
+                <small className="form-text text-danger">
                     {errors?.password?.message}
                 </small>
             )}
@@ -89,7 +89,7 @@ function UserData({
                 value={confirmPassword} 
                 onChange={e=>setConfirmPassword(e.target.value)}/>
             { errors && errors?.confirmPassword && (
-                <small class="form-text text-danger">
+                <small className="form-text text-danger">
                     {errors?.confirmPassword?.message}
                 </small>
             )}

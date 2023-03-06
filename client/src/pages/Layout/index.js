@@ -49,9 +49,7 @@ const Layout = () => {
                 </div>
             
         </nav>
-        <div className="container">
-            <Outlet />
-        </div>
+        <Outlet />
     </>
   )
 };

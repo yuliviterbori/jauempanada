@@ -1,10 +1,12 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function LoginForm() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [errors, setErrors] = useState({})
 
     const navigate = useNavigate();
 
@@ -54,6 +56,9 @@ function LoginForm() {
         </div>
         
         <button type="submit" className="btn btn-primary btn-lg w-100 mt-4">Ingresar</button>
+
+        <div className="dropdown-divider"></div>
+        <Link className="dropdown-item" to="/register">No tienes una cuenta? Crear cuenta</Link>
     </form>
     </>
         
